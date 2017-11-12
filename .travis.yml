@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+  - '0.10'
+before_install:
+  - currentfolder=${PWD##*/}
+  - if [ "$currentfolder" != 'base-react' ]; then cd .. && eval "mv $currentfolder base-react" && cd base-react; fi
