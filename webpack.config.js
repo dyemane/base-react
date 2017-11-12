@@ -1,5 +1,14 @@
 var webpack = require('webpack')
 var path = require('path')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+const extractSass = new ExtractTextPlugin({
+  filename: '[name].[contenthash].css',
+  disable: process.env.NODE_ENV === 'development'
+})
+console.log('process.env.NODE_ENV', process.env.NODE_ENV)
+var module_dir = path.resolve(__dirname, 'node_modules')
+var src_dir = path.resolve(__dirname, 'src')
 module.exports = {
   entry: ['./src/index.tsx'],
   output: {
@@ -42,8 +51,17 @@ module.exports = {
       // All files with a '.ts' or '.tsx' extension will be handled by 'awesome-typescript-loader'.
       {
         test: /\.tsx?$/,
-        exclude: path.resolve(__dirname, 'node_modules'),
+        exclude: module_dir,
         loader: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.scss$/,
+        loaders: [
+          'style?sourceMap',
+          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+          'resolve-url',
+          'sass?sourceMap'
+        ]
       },
 
       // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.

@@ -22,19 +22,19 @@ const NoMatch = ({ location }: any) =>
     </div>
   </div>
 const AppRouter = () =>
-  <Provider {...stores}>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Provider {...stores}>
       <Switch>
         <Application>
           <Switch>
             <Route path="/" exact component={HomePage} />
-            <Route path="/home" exact component={HomePage} />
+            <Route path="/home" component={HomePage} />
             <Route path="/about" component={AboutPage} />
             <Route component={NoMatch} />
           </Switch>
         </Application>
       </Switch>
-    </BrowserRouter>
-  </Provider>
+    </Provider>
+  </BrowserRouter>
 
 export default AppRouter
