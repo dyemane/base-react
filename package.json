@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "clear": "rm -rf build node_modules",
-    "build": "NODE_ENV=production webpack --progress"
+    "build": "NODE_ENV=production webpack --progress",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -27,25 +28,43 @@
     "@types/react-dom": "^16.0.3",
     "@types/react-router-dom": "^4.2.1",
     "mobx": "^3.3.1",
-    "mobx-react": "^4.3.4",
+    "mobx-react": "^4.3.5",
     "react": "^16.1.0",
     "react-dom": "^16.1.0",
-    "react-router-dom": "^4.2.2",
-    "tslint-react": "^3.2.0"
+    "react-router-dom": "^4.2.2"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.6",
+    "@types/jest": "^22.0.1",
+    "@types/react-css-modules": "^4.6.0",
     "awesome-typescript-loader": "^3.3.0",
     "css-loader": "^0.28.7",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "node-sass": "^4.6.1",
-    "postcss-loader": "^2.0.8",
-    "react-hot-loader": "^3.1.2",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "sass-loader": "^6.0.6",
-    "source-map-loader": "^0.2.3",
-    "style-loader": "^0.19.0",
-    "tslint": "^5.8.0",
+    "ts-jest": "^22.0.1",
     "tslint-loader": "^3.5.3",
-    "typescript": "^2.6.1",
+    "tslint-react": "^3.2.0",
     "webpack": "^3.8.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/test/setup.tsx",
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
+        "<rootDir>/__mocks__/fileMock.tsx",
+      "\\.(scss|css|less)$": "<rootDir>/src/test/__mocks__/styleMock.tsx"
+    }
   }
 }

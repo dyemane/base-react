@@ -1,4 +1,36 @@
 {
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "utils": ["utils"],
+      "stores": ["stores"],
+      "components": ["components"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "module": "es6",
+    "target": "es5",
+    "lib": ["dom", "es6"],
+    "jsx": "react",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": [
+    "src/types/globals.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
+
+/*{
     "compilerOptions": {
         "outDir": "./dist/",
         "sourceMap": true,
@@ -7,8 +39,8 @@
         "target": "es5",
         "jsx": "react",
         "experimentalDecorators": true,
+        "lib": ["dom", "es2017"]
     },
-    "include": [
-        "./src/**/*"
-    ]
+    "include": ["./src/** /*"]
 }
+*/

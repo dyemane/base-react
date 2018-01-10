@@ -1,2 +1,2 @@
-export * from "./Application";
-export { default } from "./Application";
+export * from './Application'
+export { default } from './Application'
