@@ -10,7 +10,6 @@ export class Application extends React.Component<IProps & IInjectedProps, {}> {
   }
   render() {
     const { loggedIn, username, children } = this.props
-    console.log(this.props.doctors)
     return (
       <div className={styles.root}>
         <div>
@@ -20,11 +19,16 @@ export class Application extends React.Component<IProps & IInjectedProps, {}> {
           {loggedIn && `(${username})`}
         </div>
 
-         <div>Doctors
-           {this.props.doctors.map(user => {
-             return (<div key={user.id}>{user.name}</div>)
-           })}
-         </div>
+        <div>
+          Doctors
+          {this.props.doctors.map(user => {
+            return (
+              <div key={user.id}>
+                {user.name}
+              </div>
+            )
+          })}
+        </div>
 
         {children}
       </div>
