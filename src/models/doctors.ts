@@ -3,7 +3,10 @@ import axios from 'axios'
 
 export const Doctor = types.model('Doctor', {
   id: types.identifier(types.number),
-  name: types.string
+  name: types.string,
+  email: types.string,
+  phone: types.string,
+  website: types.string
 })
 
 const Doctors = types

@@ -1,5 +1,6 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
+import { Input, Button } from 'semantic-ui-react'
 
 export class Login extends React.Component<IProps & IInjectedProps, IState> {
   state = { username: '', password: '' }
@@ -16,18 +17,18 @@ export class Login extends React.Component<IProps & IInjectedProps, IState> {
               </p>
             )}
           </span>
-          <input
+          <Input
             value={username}
             placeholder="username"
-            onChange={e => this.setState({ username: e.target.value })}
+            onChange={(_, data) => this.setState({ username: data.value })}
           />
-          <input
+          <Input
             value={password}
             placeholder="password"
-            onChange={e => this.setState({ password: e.target.value })}
+            onChange={(_, data) => this.setState({ password: data.value })}
             type="password"
           />
-          <button onClick={this.login}>Login</button>
+          <Button onClick={this.login}>Login</Button>
         </div>
   }
   login = () => {
