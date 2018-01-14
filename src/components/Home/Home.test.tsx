@@ -3,7 +3,8 @@ import { shallow } from 'enzyme'
 import { Home } from './Home'
 
 const props = {
-  loggedIn: 'Bob'
+  loggedIn: 'Bob',
+  doctors: []
 }
 describe('<Home />', () => {
   it('renders components', () => {

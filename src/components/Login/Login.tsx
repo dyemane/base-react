@@ -1,49 +1,72 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import { Input, Button } from 'semantic-ui-react'
+import { Grid, Segment, Message, Form, Button, Header } from 'semantic-ui-react'
 
 export class Login extends React.Component<IProps & IInjectedProps, IState> {
   state = { username: '', password: '' }
   render() {
-    const { loggedIn, errors } = this.props
-    const { username, password } = this.state
+    const { loggedIn } = this.props
     return loggedIn
       ? <button onClick={this.logout}>Logout</button>
-      : <div>
-          <span className="errors">
-            {errors.map(e =>
-              <p key={Date.now()}>
-                {e}
-              </p>
-            )}
-          </span>
-          <Input
-            value={username}
-            placeholder="username"
-            onChange={(_, data) => this.setState({ username: data.value })}
-          />
-          <Input
-            value={password}
-            placeholder="password"
-            onChange={(_, data) => this.setState({ password: data.value })}
-            type="password"
-          />
-          <Button onClick={this.login}>Login</Button>
-        </div>
+      : this.LoginForm()
+  }
+  LoginForm() {
+    return (
+      <div className="login-form">
+        <Grid
+          textAlign="center"
+          style={{ height: '100%' }}
+          verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Header as="h2" color="teal" textAlign="center">
+              Log-in to your account
+            </Header>
+            <Form size="large">
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                  onChange={(_, data) =>
+                    this.setState({ username: data.value })}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  onChange={(_, data) =>
+                    this.setState({ password: data.value })}
+                />
+
+                <Button color="teal" fluid size="large" onClick={this.login}>
+                  Login
+                </Button>
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <a href="#">Sign Up</a>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      </div>
+    )
   }
   login = () => {
     this.props.login(this.state.username, this.state.password).then(() => {
-      if (this.props.errors.length === 0) {
-        this.setState({ username: '', password: '' })
-      }
+      this.props.history.push('/')
     })
   }
   logout = () => this.props.logout()
 }
 
-export default inject<IInjectedProps, IProps>((stores: any) => ({
+export default inject<IInjectedProps, IProps>((
+  stores: any /*, ownProps: IProps*/
+) => ({
   loggedIn: stores.authStore.loggedIn,
-  errors: stores.authStore.errors,
   login(username: string, password: string): Promise<void> {
     return stores.authStore.login(username, password)
   },
@@ -58,10 +81,10 @@ interface IState {
 }
 interface IProps {
   children?: any
+  history?: any
 }
 interface IInjectedProps {
   loggedIn?: string
-  errors?: string[]
   login?(username: string, password: string): Promise<void>
   logout?(): void
 }

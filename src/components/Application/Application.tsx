@@ -1,7 +1,6 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
 import { Link } from 'react-router-dom'
-import Login from '../Login'
 import { Container } from 'semantic-ui-react'
 import styles from './Application.scss'
 
@@ -12,8 +11,7 @@ export class Application extends React.Component<IProps & IInjectedProps, {}> {
       <Container className={styles.root}>
         <div>
           <Link to="/">Home</Link> |
-          <Link to="/about">About</Link>
-          <Login />
+          <Link to="/login">Login</Link>
           {loggedIn && `(${username})`}
         </div>
         {children}

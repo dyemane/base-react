@@ -4,11 +4,8 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import { Provider } from 'mobx-react'
 import stores from './stores'
 import Home from './components/Home'
+import Login from './components/Login'
 
-const AboutPage = () =>
-  <div>
-    This is an About Page <Link to="/home">Home</Link>
-  </div>
 const NoMatch = ({ location }: any) =>
   <div>
     <h3>
@@ -26,7 +23,7 @@ const AppRouter = () =>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/home" component={Home} />
-            <Route path="/about" component={AboutPage} />
+            <Route path="/login" component={Login} />
             <Route component={NoMatch} />
           </Switch>
         </Application>
