@@ -1,41 +1,25 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react'
-import { List, Image } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react'
+import { USERTYPES, IUser } from 'models/auth'
+import Customer from './Customer'
+import Provider from './Provider'
 
 export class Home extends React.Component<IProps & IInjectedProps, IState> {
   render() {
+    const { hasRole } = this.props
     return (
       <div>
         <List>
-          {this.props.doctors.map(user => {
-            return (
-              <List.Item key={user.id}>
-                <Image
-                  avatar
-                  src="https://cdn0.iconfinder.com/data/icons/people-groups/512/User_Male-512.png"
-                />
-                <List.Content>
-                  <List.Header as="a">
-                    {user.name}
-                  </List.Header>
-                  <List.Description>
-                    <div>
-                      <b>Email: </b>
-                      {user.email}
-                    </div>
-                    <div>
-                      <b>Site: </b>
-                      {user.website}
-                    </div>
-                    <div>
-                      <b>Phone: </b>
-                      {user.phone}
-                    </div>
-                  </List.Description>
-                </List.Content>
-              </List.Item>
-            )
-          })}
+          <List.Item>
+            <List.Content>
+              <List.Header as="a">ME</List.Header>
+              <List.Description>
+                {hasRole(USERTYPES.PROVIDER) && <Provider />}
+                {hasRole(USERTYPES.CUSTOMER) && <Customer />}
+              </List.Description>
+            </List.Content>
+          </List.Item>
         </List>
       </div>
     )
@@ -43,13 +27,17 @@ export class Home extends React.Component<IProps & IInjectedProps, IState> {
 }
 
 export default inject<IInjectedProps, IProps>((stores: any) => ({
-  loggedIn: stores.authStore.loggedIn,
-  doctors: stores.doctors.doctors
+  user: stores.auth.user,
+  isLoggedIn: stores.auth.isLoggedIn,
+  hasRole(role): boolean {
+    return stores.auth.hasRole(role)
+  }
 }))(observer(Home))
 
 interface IState {}
 interface IProps {}
 interface IInjectedProps {
-  loggedIn: string
-  doctors: any[]
+  user?: IUser
+  isLoggedIn: boolean
+  hasRole(role): boolean
 }

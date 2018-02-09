@@ -9,7 +9,7 @@ export const Doctor = types.model('Doctor', {
   website: types.string
 })
 
-const Doctors = types
+export const Doctors = types
   .model('Doctors', {
     doctors: types.optional(types.array(Doctor), [])
   })

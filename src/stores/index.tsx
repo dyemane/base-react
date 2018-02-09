@@ -1,9 +1,9 @@
-import AuthStore from './AuthStore'
-import DoctorStore from './DoctorStore'
-import Doctors from '../models/doctors'
+import { Auth, Doctors } from '../models'
+
+const auth = Auth.create()
+const doctors = Doctors.create({}, auth)
 const store = {
-  authStore: new AuthStore(),
-  doctorStore: new DoctorStore(),
-  doctors: Doctors.create(),
+  auth,
+  doctors
 }
 export default store

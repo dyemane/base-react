@@ -24,6 +24,7 @@ const AppRouter = () =>
             <Route path="/" exact component={Home} />
             <Route path="/home" component={Home} />
             <Route path="/login" component={Login} />
+            <Route path="/logout" component={Login} />
             <Route component={NoMatch} />
           </Switch>
         </Application>
